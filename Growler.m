@@ -127,7 +127,7 @@ static Growler* sharedInstance = nil;
 }
 
 #pragma mark -
-#pragma mark Context management
+#pragma mark Callback block management
 
 - (NSNumber*) addBlock:(GrowlerCallback)block
 {
@@ -144,7 +144,7 @@ static Growler* sharedInstance = nil;
 }
 
 #pragma mark -
-#pragma mark Growl callbacks
+#pragma mark GrowlApplicationBridge delegate
 
 - (NSDictionary *) registrationDictionaryForGrowl
 {
