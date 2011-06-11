@@ -113,7 +113,12 @@ static Growler* sharedInstance = nil;
 
     NSNumber *context = nil;
     if (theBlock)
-        context = [self addBlock:theBlock];
+    {
+        /* Make sure that stack blocks are copied to the heap before stashed away. */
+        GrowlerCallback heapBlock = [theBlock copy];
+        context = [self addBlock:heapBlock];
+        [heapBlock release];
+    }
 
     DLog(@"Growling '%@' with title '%@' (%@)", aGrowl.description, aGrowl.title, aGrowl.notificationName);
     [GrowlApplicationBridge notifyWithTitle:aGrowl.title
