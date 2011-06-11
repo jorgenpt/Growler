@@ -9,57 +9,26 @@
 #import <Cocoa/Cocoa.h>
 #import <Growl/Growl.h>
 
-#import "GrowlerDelegate.h"
+#import "GrowlerGrowl.h"
 
-@interface Growler : NSObject <GrowlApplicationBridgeDelegate> {
-    NSMutableDictionary* contexts;
-}
+@protocol GrowlerDelegate
+- (void) growlClicked;
+- (void) growlIgnored;
+@end
 
-@property (nonatomic, retain) NSMutableDictionary* contexts;
+typedef enum {
+    GrowlerGrowlClicked,
+    GrowlerGrowlIgnored
+} GrowlerGrowlAction;
 
-#pragma mark
-#pragma mark Singleton management code
-#pragma mark -
+typedef void (^GrowlerCallback)(GrowlerGrowlAction);
+
+@interface Growler : NSObject <GrowlApplicationBridgeDelegate>
 
 + (id) sharedInstance;
 
-- (id) init;
-- (id) copyWithZone:(NSZone *)zone;
-- (id) retain;
-- (NSUInteger) retainCount;
-- (void) release;
-- (id) autorelease;
-
-#pragma mark
-#pragma mark -
-#pragma mark Messaging
-
-- (void) errorWithTitle:(NSString *)title
-            description:(NSString *)description;
-- (void) messageWithTitle:(NSString *)title
-              description:(NSString *)description
-                     name:(NSString *)notificationName
-          delegateContext:(GrowlerDelegateContext *)context;
-- (void) messageWithTitle:(NSString *)title
-              description:(NSString *)description
-                     name:(NSString *)notificationName
-          delegateContext:(GrowlerDelegateContext *)context
-                   sticky:(BOOL)stickiness;
-
-#pragma mark
-#pragma mark -
-#pragma mark Context management
-
-- (NSNumber *) addContext:(id)context;
-- (GrowlerDelegateContext *) retrieveContextByKey:(id)contextKey;
-
-#pragma mark
-#pragma mark -
-#pragma mark Growl callbacks
-
-- (NSDictionary *) registrationDictionaryForGrowl;
-
-- (void) growlNotificationWasClicked:(id)context;
-- (void) growlNotificationTimedOut:(id)context;
+- (void) growl:(GrowlerGrowl *)aGrowl;
+- (void) growl:(GrowlerGrowl *)aGrowl withDelegate:(id<GrowlerDelegate>)theDelegate;
+- (void) growl:(GrowlerGrowl *)aGrowl withBlock:(GrowlerCallback)theBlock;
 
 @end

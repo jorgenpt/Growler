@@ -8,14 +8,31 @@
 
 #import "Growler.h"
 
+#ifndef DLog
+# ifdef DEBUG
+#    define DLog(fmt, ...) NSLog((@"%s, line %d: " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+# else
+#    define DLog(...)
+# endif
+#endif
+
+@interface Growler () {
+    NSMutableDictionary *contexts;
+}
+@property (nonatomic, retain) NSMutableDictionary* contexts;
+
+- (NSNumber *) addBlock:(GrowlerCallback)block;
+- (GrowlerCallback) retrieveBlockWithKey:(id)aKey;
+
+@end
+
 @implementation Growler
 
 @synthesize contexts;
 static Growler* sharedInstance = nil;
 
-#pragma mark
-#pragma mark Singleton management code
 #pragma mark -
+#pragma mark Singleton management code
 
 + (id) sharedInstance
 {
@@ -44,7 +61,8 @@ static Growler* sharedInstance = nil;
     Class myClass = [self class];
     @synchronized(myClass) {
         if (sharedInstance == nil) {
-            if (sharedInstance = [super init])
+            sharedInstance = [super init];
+            if (sharedInstance)
             {
                 [GrowlApplicationBridge setGrowlDelegate:sharedInstance];
                 [sharedInstance setContexts:[NSMutableDictionary dictionary]];
@@ -62,75 +80,62 @@ static Growler* sharedInstance = nil;
 - (void) release {}
 - (id) autorelease { return self; }
 
-#pragma mark
 #pragma mark -
 #pragma mark Messaging
 
-- (void) errorWithTitle:(NSString *)title
-            description:(NSString *)description
+- (void) growl:(GrowlerGrowl *)aGrowl
 {
-    DLog(@"Growling error '%@' with title '%@'", description, title);
-    NSImage* icon = [NSImage imageNamed:NSImageNameCaution];
-    [GrowlApplicationBridge notifyWithTitle:title
-                                description:description
-                           notificationName:@"Error"
-                                   iconData:[icon TIFFRepresentation]
-                                   priority:2 // EMERGENCY!
-                                   isSticky:NO
-                               clickContext:nil];
+    [self growl:aGrowl withBlock:nil];
 }
 
-- (void) messageWithTitle:(NSString *)title
-              description:(NSString *)description
-                     name:(NSString *)notificationName
-          delegateContext:(GrowlerDelegateContext *)context
+- (void) growl:(GrowlerGrowl *)aGrowl withDelegate:(id<GrowlerDelegate>)theDelegate
 {
-    [self messageWithTitle:title
-               description:description
-                      name:notificationName
-           delegateContext:context
-                    sticky:NO];
+    [self growl:aGrowl withBlock:^(GrowlerGrowlAction action) {
+        if (action == GrowlerGrowlClicked)
+            [theDelegate growlClicked];
+        else
+            [theDelegate growlIgnored];
+    }];
 }
 
-- (void) messageWithTitle:(NSString *)title
-              description:(NSString *)description
-                     name:(NSString *)notificationName
-          delegateContext:(GrowlerDelegateContext *)context
-                   sticky:(BOOL)stickiness
+- (void) growl:(GrowlerGrowl *)aGrowl withBlock:(GrowlerCallback)theBlock
 {
-    DLog(@"Growling '%@' with title '%@' (%@)", description, title, notificationName);
-    NSNumber* contextKey = nil;
-    if (context)
-        contextKey = [self addContext:context];
+    NSData *iconData = nil;
+    if (aGrowl.icon)
+        iconData = [aGrowl.icon TIFFRepresentation];
+    
+    NSNumber *context = nil;
+    if (theBlock)
+        context = [self addBlock:theBlock];
 
-    [GrowlApplicationBridge notifyWithTitle:title
-                                description:description
-                           notificationName:notificationName
-                                   iconData:nil
-                                   priority:0
-                                   isSticky:stickiness
-                               clickContext:contextKey];
+    DLog(@"Growling '%@' with title '%@' (%@)", aGrowl.description, aGrowl.title, aGrowl.notificationName);
+    [GrowlApplicationBridge notifyWithTitle:aGrowl.title
+                                description:aGrowl.description
+                           notificationName:aGrowl.notificationName
+                                   iconData:iconData
+                                   priority:aGrowl.priority
+                                   isSticky:aGrowl.isSticky
+                               clickContext:context];
+    
 }
 
-#pragma mark
 #pragma mark -
 #pragma mark Context management
 
-- (NSNumber*) addContext:(id) context
+- (NSNumber*) addBlock:(GrowlerCallback)block
 {
-    NSNumber* hash = [NSNumber numberWithInt:[context hash]];
-    [contexts setObject:context forKey:hash];
+    NSNumber* hash = [NSNumber numberWithInt:[block hash]];
+    [contexts setObject:block forKey:hash];
     return hash;
 }
 
-- (GrowlerDelegateContext*) retrieveContextByKey:(id) contextKey
+- (GrowlerCallback) retrieveBlockWithKey:(id)aKey
 {
-    GrowlerDelegateContext* context = [[contexts objectForKey:contextKey] retain];
-    [contexts removeObjectForKey:contextKey];
-    return [context autorelease];
+    GrowlerCallback block = [[contexts objectForKey:aKey] retain];
+    [contexts removeObjectForKey:aKey];
+    return [block autorelease];
 }
 
-#pragma mark
 #pragma mark -
 #pragma mark Growl callbacks
 
@@ -182,18 +187,18 @@ static Growler* sharedInstance = nil;
     return dictionary;
 }
 
-- (void) growlNotificationWasClicked:(id)contextKey
+- (void) growlNotificationWasClicked:(id)context
 {
-    GrowlerDelegateContext* context = [self retrieveContextByKey:contextKey];
-    [[context target] performSelector:[context clickedSelector]
-                           withObject:[context data]];
+    GrowlerCallback callback = [self retrieveBlockWithKey:context];
+    if (callback)
+        callback(GrowlerGrowlClicked);
 }
 
-- (void) growlNotificationTimedOut:(id)contextKey
+- (void) growlNotificationTimedOut:(id)context
 {
-    GrowlerDelegateContext* context = [self retrieveContextByKey:contextKey];
-    [[context target] performSelector:[context timedOutSelector]
-                           withObject:[context data]];
+    GrowlerCallback callback = [self retrieveBlockWithKey:context];
+    if (callback)
+        callback(GrowlerGrowlIgnored);
 }
 
 @end
