@@ -52,7 +52,7 @@
         [self setPriority:GrowlNormalPriority];
         [self setSticky:NO];
     }
-    
+
     return self;
 }
 
@@ -74,7 +74,7 @@
         [self setTitle:theTitle];
         [self setDescription:theDescription];
     }
-    
+
     return self;
 }
 
@@ -86,7 +86,7 @@
         [self setPriority:GrowlEmergencyPriority];
         [self setIcon:[NSImage imageNamed:NSImageNameCaution]];
     }
-    
+
     return self;
 }
 

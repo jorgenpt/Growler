@@ -16,10 +16,12 @@
 # endif
 #endif
 
-@interface Growler () {
-    NSMutableDictionary *contexts;
-}
+@interface Growler ()
+
 @property (nonatomic, retain) NSMutableDictionary* contexts;
+
+- (void) growl:(GrowlerGrowl *)aGrowl;
+- (void) growl:(GrowlerGrowl *)aGrowl withBlock:(GrowlerCallback)theBlock;
 
 - (NSNumber *) addBlock:(GrowlerCallback)block;
 - (GrowlerCallback) retrieveBlockWithKey:(id)aKey;
@@ -34,15 +36,22 @@ static Growler* sharedInstance = nil;
 #pragma mark -
 #pragma mark Singleton management code
 
-+ (id) sharedInstance
+/* "The runtime sends initialize to each class in a program exactly one time
+ * just before the class, or any class that inherits from it, is sent its first
+ * message from within the program. (Thus the method may never be invoked if the
+ * class is not used.) The runtime sends the initialize message to classes in a
+ * thread-safe manner. Superclasses receive this message before their
+ * subclasses."
+ */
++ (void)initialize
 {
-    @synchronized(self)
-    {
-        if (sharedInstance == nil)
-            [[self alloc] init];
-    }
-    return sharedInstance;
+    if (sharedInstance == nil)
+        sharedInstance = [[self alloc] init];
+}
 
++ (id) sharedGrowler
+{
+    return sharedInstance;
 }
 
 + (id) allocWithZone:(NSZone *)zone
@@ -58,15 +67,13 @@ static Growler* sharedInstance = nil;
 
 - (id) init
 {
-    Class myClass = [self class];
-    @synchronized(myClass) {
-        if (sharedInstance == nil) {
-            sharedInstance = [super init];
-            if (sharedInstance)
-            {
-                [GrowlApplicationBridge setGrowlDelegate:sharedInstance];
-                [sharedInstance setContexts:[NSMutableDictionary dictionary]];
-            }
+    if (sharedInstance == nil)
+    {
+        sharedInstance = [super init];
+        if (sharedInstance)
+        {
+            [GrowlApplicationBridge setGrowlDelegate:sharedInstance];
+            [sharedInstance setContexts:[NSMutableDictionary dictionary]];
         }
     }
 
@@ -83,19 +90,19 @@ static Growler* sharedInstance = nil;
 #pragma mark -
 #pragma mark Messaging
 
++ (void) growl:(GrowlerGrowl *)aGrowl
+{
+    [[self sharedGrowler] growl:aGrowl withBlock:nil];
+}
+
++ (void) growl:(GrowlerGrowl *)aGrowl withBlock:(GrowlerCallback)theBlock
+{
+    [[self sharedGrowler] growl:aGrowl withBlock:theBlock];
+}
+
 - (void) growl:(GrowlerGrowl *)aGrowl
 {
     [self growl:aGrowl withBlock:nil];
-}
-
-- (void) growl:(GrowlerGrowl *)aGrowl withDelegate:(id<GrowlerDelegate>)theDelegate
-{
-    [self growl:aGrowl withBlock:^(GrowlerGrowlAction action) {
-        if (action == GrowlerGrowlClicked)
-            [theDelegate growlClicked];
-        else
-            [theDelegate growlIgnored];
-    }];
 }
 
 - (void) growl:(GrowlerGrowl *)aGrowl withBlock:(GrowlerCallback)theBlock
@@ -103,7 +110,7 @@ static Growler* sharedInstance = nil;
     NSData *iconData = nil;
     if (aGrowl.icon)
         iconData = [aGrowl.icon TIFFRepresentation];
-    
+
     NSNumber *context = nil;
     if (theBlock)
         context = [self addBlock:theBlock];
@@ -116,7 +123,7 @@ static Growler* sharedInstance = nil;
                                    priority:aGrowl.priority
                                    isSticky:aGrowl.isSticky
                                clickContext:context];
-    
+
 }
 
 #pragma mark -

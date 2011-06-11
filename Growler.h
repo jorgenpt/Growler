@@ -11,11 +11,6 @@
 
 #import "GrowlerGrowl.h"
 
-@protocol GrowlerDelegate
-- (void) growlClicked;
-- (void) growlIgnored;
-@end
-
 typedef enum {
     GrowlerGrowlClicked,
     GrowlerGrowlIgnored
@@ -24,11 +19,11 @@ typedef enum {
 typedef void (^GrowlerCallback)(GrowlerGrowlAction);
 
 @interface Growler : NSObject <GrowlApplicationBridgeDelegate>
+{
+    NSMutableDictionary *contexts;
+}
 
-+ (id) sharedInstance;
-
-- (void) growl:(GrowlerGrowl *)aGrowl;
-- (void) growl:(GrowlerGrowl *)aGrowl withDelegate:(id<GrowlerDelegate>)theDelegate;
-- (void) growl:(GrowlerGrowl *)aGrowl withBlock:(GrowlerCallback)theBlock;
++ (void) growl:(GrowlerGrowl *)aGrowl;
++ (void) growl:(GrowlerGrowl *)aGrowl withBlock:(GrowlerCallback)theBlock;
 
 @end
