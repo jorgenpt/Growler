@@ -5,8 +5,16 @@ Setup
 -----
 
 To set Growler up for use in your project, you need to configure it to build
-with the Growl framework, then just drop the four files in this directory into
-your project.
+with the Growl framework, then just add the following files to your project:
+
+ * Growler.h
+ * Growler.m
+ * GrowlerGrowl.h
+ * GrowlerGrowl.m
+
+Then define BUNDLE\_IDENTIFIER in your precompiled header to be your
+CFBundleIdentifier (e.g.  `no.devsoft.GrowlerTests`). For an example, check out
+`Tests/GrowlerTests-Prefix.pch`.
 
 Growler has only been tested with Growl 1.2.x and above.
 
