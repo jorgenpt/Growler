@@ -1,6 +1,6 @@
 //
 //  Growler.m
-//  GrabBox
+//  Growler
 //
 //  Created by Jørgen P. Tjernø on 7/12/10.
 //  Copyright 2010 devSoft. All rights reserved.
@@ -136,7 +136,7 @@ static Growler* sharedInstance = nil;
 
 - (NSNumber*) addBlock:(GrowlerCallback)block
 {
-    NSNumber* hash = [NSNumber numberWithInt:[block hash]];
+    NSNumber* hash = [NSNumber numberWithUnsignedInteger:[block hash]];
     [contexts setObject:block forKey:hash];
     return hash;
 }

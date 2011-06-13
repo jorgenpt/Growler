@@ -1,6 +1,6 @@
 //
 //  GrowlerGrowl.h
-//  GrabBox
+//  Growler
 //
 //  Created by Jørgen P. Tjernø on 6/11/11.
 //  Copyright 2011 devSoft. All rights reserved.
@@ -10,8 +10,8 @@
 
 /* Based on http://growl.info/documentation/developer/introduction.php */
 enum {
-    GrowlVeryLowPriorty = -2,
-    GrowlModeratePriorty = -1,
+    GrowlVeryLowPriority = -2,
+    GrowlModeratePriority = -1,
     GrowlNormalPriority = 0,
     GrowlHighPriority = 1,
     GrowlEmergencyPriority = 2

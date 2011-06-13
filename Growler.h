@@ -1,6 +1,6 @@
 //
 //  Growler.h
-//  GrabBox
+//  Growler
 //
 //  Created by Jørgen P. Tjernø on 7/12/10.
 //  Copyright 2010 devSoft. All rights reserved.

@@ -28,7 +28,7 @@ contain, with one of the following four constructors:
     myGrowl = [GrowlerGrowl growlWithName:@"Operation completed"];
     myGrowl = [GrowlerGrowl growlWithName:@"Operation completed"
                                     title:@"Operation completed!"
-                              description:@"The upload operation completed succesfully"];
+                              description:@"The upload operation completed successfully"];
     myGrowl = [GrowlerGrowl growlErrorWithTitle:@"Operation failed"
                                     description:@"Could not complete the upload"];
 
@@ -44,8 +44,8 @@ You can customize the growl with the following attributes:
     [myGrowl setIcon:[NSImage imageNamed:NSImageNameCaution]];
 
     /* Valid values are:
-     *   GrowlVeryLowPriorty
-     *   GrowlModeratePriorty
+     *   GrowlVeryLowPriority
+     *   GrowlModeratePriority
      *   GrowlNormalPriority (Default)
      *   GrowlHighPriority
      *   GrowlEmergencyPriority (Default for growlErrorWithTitle:description:)

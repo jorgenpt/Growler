@@ -1,6 +1,6 @@
 //
 //  GrowlerGrowl.m
-//  GrabBox
+//  Growler
 //
 //  Created by Jørgen P. Tjernø on 6/11/11.
 //  Copyright 2011 devSoft. All rights reserved.
