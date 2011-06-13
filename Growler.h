@@ -7,7 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <Growl/Growl.h>
+
+#ifndef UNIT_TEST
+# import <Growl/Growl.h>
+#endif
 
 #import "GrowlerGrowl.h"
 

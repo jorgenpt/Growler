@@ -1,0 +1,331 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8E743B1E13A5C9B0006A6536 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E743B1D13A5C9B0006A6536 /* Cocoa.framework */; };
+		8E743B2813A5C9B1006A6536 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E743B2613A5C9B0006A6536 /* InfoPlist.strings */; };
+		8E743B2B13A5C9B1006A6536 /* GrowlerTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 8E743B2A13A5C9B1006A6536 /* GrowlerTests.h */; };
+		8E743B2D13A5C9B1006A6536 /* GrowlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E743B2C13A5C9B1006A6536 /* GrowlerTests.m */; };
+		8E743B3113A5C9F1006A6536 /* Growler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E743B0D13A5C944006A6536 /* Growler.m */; };
+		8E743B3213A5C9F1006A6536 /* GrowlerGrowl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E743B0F13A5C944006A6536 /* GrowlerGrowl.m */; };
+		8E743B3613A5CB0C006A6536 /* GrowlApplicationBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E743B3513A5CB0C006A6536 /* GrowlApplicationBridge.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8E743B0C13A5C944006A6536 /* Growler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Growler.h; sourceTree = "<group>"; };
+		8E743B0D13A5C944006A6536 /* Growler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Growler.m; sourceTree = "<group>"; };
+		8E743B0E13A5C944006A6536 /* GrowlerGrowl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GrowlerGrowl.h; sourceTree = "<group>"; };
+		8E743B0F13A5C944006A6536 /* GrowlerGrowl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GrowlerGrowl.m; sourceTree = "<group>"; };
+		8E743B1313A5C98D006A6536 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		8E743B1413A5C98D006A6536 /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
+		8E743B1A13A5C9B0006A6536 /* GrowlerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrowlerTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E743B1D13A5C9B0006A6536 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		8E743B2013A5C9B0006A6536 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		8E743B2113A5C9B0006A6536 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		8E743B2213A5C9B0006A6536 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8E743B2513A5C9B0006A6536 /* GrowlerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GrowlerTests-Info.plist"; sourceTree = "<group>"; };
+		8E743B2713A5C9B0006A6536 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8E743B2913A5C9B1006A6536 /* GrowlerTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GrowlerTests-Prefix.pch"; sourceTree = "<group>"; };
+		8E743B2A13A5C9B1006A6536 /* GrowlerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GrowlerTests.h; sourceTree = "<group>"; };
+		8E743B2C13A5C9B1006A6536 /* GrowlerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GrowlerTests.m; sourceTree = "<group>"; };
+		8E743B3413A5CB0C006A6536 /* GrowlApplicationBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowlApplicationBridge.h; sourceTree = "<group>"; };
+		8E743B3513A5CB0C006A6536 /* GrowlApplicationBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowlApplicationBridge.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8E743B1613A5C9B0006A6536 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E743B1E13A5C9B0006A6536 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8E743AFD13A5C8FF006A6536 = {
+			isa = PBXGroup;
+			children = (
+				8E743B1113A5C948006A6536 /* Classes */,
+				8E743B3313A5CAC6006A6536 /* Mocks */,
+				8E743B2313A5C9B0006A6536 /* Tests */,
+				8E743B1C13A5C9B0006A6536 /* Frameworks */,
+				8E743B1B13A5C9B0006A6536 /* Products */,
+				8E743B1313A5C98D006A6536 /* LICENSE */,
+				8E743B1413A5C98D006A6536 /* README.markdown */,
+			);
+			sourceTree = "<group>";
+		};
+		8E743B1113A5C948006A6536 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8E743B0C13A5C944006A6536 /* Growler.h */,
+				8E743B0D13A5C944006A6536 /* Growler.m */,
+				8E743B0E13A5C944006A6536 /* GrowlerGrowl.h */,
+				8E743B0F13A5C944006A6536 /* GrowlerGrowl.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		8E743B1B13A5C9B0006A6536 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E743B1A13A5C9B0006A6536 /* GrowlerTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8E743B1C13A5C9B0006A6536 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8E743B1D13A5C9B0006A6536 /* Cocoa.framework */,
+				8E743B1F13A5C9B0006A6536 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8E743B1F13A5C9B0006A6536 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8E743B2013A5C9B0006A6536 /* AppKit.framework */,
+				8E743B2113A5C9B0006A6536 /* CoreData.framework */,
+				8E743B2213A5C9B0006A6536 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		8E743B2313A5C9B0006A6536 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				8E743B2A13A5C9B1006A6536 /* GrowlerTests.h */,
+				8E743B2C13A5C9B1006A6536 /* GrowlerTests.m */,
+				8E743B2413A5C9B0006A6536 /* Supporting Files */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		8E743B2413A5C9B0006A6536 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8E743B2513A5C9B0006A6536 /* GrowlerTests-Info.plist */,
+				8E743B2613A5C9B0006A6536 /* InfoPlist.strings */,
+				8E743B2913A5C9B1006A6536 /* GrowlerTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8E743B3313A5CAC6006A6536 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				8E743B3413A5CB0C006A6536 /* GrowlApplicationBridge.h */,
+				8E743B3513A5CB0C006A6536 /* GrowlApplicationBridge.m */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8E743B1913A5C9B0006A6536 /* GrowlerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E743B2E13A5C9B1006A6536 /* Build configuration list for PBXNativeTarget "GrowlerTests" */;
+			buildPhases = (
+				8E743B1513A5C9B0006A6536 /* Sources */,
+				8E743B1613A5C9B0006A6536 /* Frameworks */,
+				8E743B1713A5C9B0006A6536 /* Resources */,
+				8E743B1813A5C9B0006A6536 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GrowlerTests;
+			productName = GrowlerTests;
+			productReference = 8E743B1A13A5C9B0006A6536 /* GrowlerTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8E743AFF13A5C8FF006A6536 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = devSoft;
+			};
+			buildConfigurationList = 8E743B0213A5C8FF006A6536 /* Build configuration list for PBXProject "Growler" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8E743AFD13A5C8FF006A6536;
+			productRefGroup = 8E743B1B13A5C9B0006A6536 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8E743B1913A5C9B0006A6536 /* GrowlerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8E743B1713A5C9B0006A6536 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E743B2813A5C9B1006A6536 /* InfoPlist.strings in Resources */,
+				8E743B2B13A5C9B1006A6536 /* GrowlerTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8E743B1813A5C9B0006A6536 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8E743B1513A5C9B0006A6536 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E743B3113A5C9F1006A6536 /* Growler.m in Sources */,
+				8E743B3213A5C9F1006A6536 /* GrowlerGrowl.m in Sources */,
+				8E743B2D13A5C9B1006A6536 /* GrowlerTests.m in Sources */,
+				8E743B3613A5CB0C006A6536 /* GrowlApplicationBridge.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8E743B2613A5C9B0006A6536 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8E743B2713A5C9B0006A6536 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8E743B0413A5C8FF006A6536 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		8E743B0513A5C8FF006A6536 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		8E743B2F13A5C9B1006A6536 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tests/GrowlerTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					UNIT_TEST,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Tests/GrowlerTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		8E743B3013A5C9B1006A6536 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tests/GrowlerTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = UNIT_TEST;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Tests/GrowlerTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8E743B0213A5C8FF006A6536 /* Build configuration list for PBXProject "Growler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E743B0413A5C8FF006A6536 /* Debug */,
+				8E743B0513A5C8FF006A6536 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E743B2E13A5C9B1006A6536 /* Build configuration list for PBXNativeTarget "GrowlerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E743B2F13A5C9B1006A6536 /* Debug */,
+				8E743B3013A5C9B1006A6536 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8E743AFF13A5C8FF006A6536 /* Project object */;
+}

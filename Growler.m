@@ -9,7 +9,7 @@
 #import "Growler.h"
 
 #ifndef DLog
-# ifdef DEBUG
+# if defined(DEBUG) && !defined(UNIT_TEST)
 #    define DLog(fmt, ...) NSLog((@"%s, line %d: " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 # else
 #    define DLog(...)
