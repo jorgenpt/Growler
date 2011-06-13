@@ -17,6 +17,7 @@
 {
     GrowlerGrowl *myGrowl = [GrowlerGrowl growl];
     [Growler growl:myGrowl];
+
     STAssertEqualObjects([GrowlApplicationBridge lastTitle], @"",
                          @"- title should be empty");
     STAssertEqualObjects([GrowlApplicationBridge lastDescription], @"",
@@ -118,6 +119,42 @@
                    @"- priority should be emergency");
     STAssertFalse([GrowlApplicationBridge lastWasSticky],
                   @"- notification should not be sticky");
+}
+
+- (void)testCallbackClicked
+{
+    __block BOOL gotCallback = NO;
+
+    GrowlerGrowl *myGrowl = [GrowlerGrowl growl];
+    [Growler growl:myGrowl
+         withBlock:^(GrowlerGrowlAction action) {
+             gotCallback = YES;
+             if (action != GrowlerGrowlClicked)
+                 STFail(@"Got non-click action %d", action);
+         }];
+
+    STAssertFalse(gotCallback, @"- callback should not be called before click event.");
+    
+    [GrowlApplicationBridge clickLastNotification];
+    STAssertTrue(gotCallback, @"- callback should be called after click event.");
+}
+
+- (void)testCallbackDismissed
+{
+    __block BOOL gotCallback = NO;
+    
+    GrowlerGrowl *myGrowl = [GrowlerGrowl growl];
+    [Growler growl:myGrowl
+         withBlock:^(GrowlerGrowlAction action) {
+             gotCallback = YES;
+             if (action != GrowlerGrowlIgnored)
+                 STFail(@"Got non-ignore action %d", action);
+         }];
+    
+    STAssertFalse(gotCallback, @"- callback should not be called before click event.");
+    
+    [GrowlApplicationBridge dismissLastNotification];
+    STAssertTrue(gotCallback, @"- callback should be called after click event.");
 }
 
 @end
