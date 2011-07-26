@@ -84,7 +84,7 @@ static Growler* sharedInstance = nil;
 - (id) copyWithZone:(NSZone *)zone { return self; }
 - (id) retain { return self; }
 - (NSUInteger) retainCount { return UINT_MAX; }
-- (void) release {}
+- (oneway void) release {}
 - (id) autorelease { return self; }
 
 #pragma mark -
