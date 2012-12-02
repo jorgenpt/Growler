@@ -213,4 +213,9 @@ static Growler* sharedInstance = nil;
         callback(GrowlerGrowlIgnored);
 }
 
+- (BOOL) hasNetworkClientEntitlement
+{
+    return YES;
+}
+
 @end
