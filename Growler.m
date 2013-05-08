@@ -144,7 +144,9 @@ static Growler* sharedInstance = nil;
 - (GrowlerCallback) retrieveBlockWithKey:(id)aKey
 {
     GrowlerCallback block = [[contexts objectForKey:aKey] retain];
-    [contexts removeObjectForKey:aKey];
+    if (aKey && block) {
+        [contexts removeObjectForKey:aKey];
+    }
     return [block autorelease];
 }
 
