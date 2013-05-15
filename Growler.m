@@ -136,7 +136,7 @@ static Growler* sharedInstance = nil;
 
 - (NSNumber*) addBlock:(GrowlerCallback)block
 {
-    NSNumber* hash = [NSNumber numberWithUnsignedInteger:[block hash]];
+    NSNumber* hash = [NSNumber numberWithUnsignedInteger:[(NSObject*)block hash]];
     [contexts setObject:block forKey:hash];
     return hash;
 }
