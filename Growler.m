@@ -80,6 +80,13 @@ static Growler* sharedInstance = nil;
     return sharedInstance;
 }
 
+- (void) dealloc
+{
+    [self setContexts:nil];
+
+    [super dealloc];
+}
+
 /* Make sure there is always one instance, and make sure it's never free'd. */
 - (id) copyWithZone:(NSZone *)zone { return self; }
 - (id) retain { return self; }
