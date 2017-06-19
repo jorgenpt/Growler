@@ -178,22 +178,22 @@ static Growler* sharedInstance = nil;
         return nil;
     }
 
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    if (!data)
+    NSInputStream* stream = [NSInputStream inputStreamWithFileAtPath:path];
+    [stream open];
+    if ([stream streamStatus] == NSStreamStatusError)
     {
-        NSLog(@"Could not read Growl registration ticket from %@", path);
+        NSLog(@"Could not read Growl registration ticket from %@: %@", path, [stream streamError]);
         return nil;
     }
 
-    NSString *errorDescription;
-    NSDictionary *dictionary = [NSPropertyListSerialization propertyListFromData:data
-                                                                mutabilityOption:0
-                                                                          format:NULL
-                                                                errorDescription:&errorDescription];
-    if (errorDescription)
+    NSError *error = nil;
+    NSDictionary *dictionary = [NSPropertyListSerialization propertyListWithStream:stream
+                                                                           options:NSPropertyListImmutable
+                                                                            format:nil
+                                                                             error:&error];
+    if (error)
     {
-        NSLog(@"Could not parse the Growl registration ticket from %@: %@", path, errorDescription);
-        [errorDescription release];
+        NSLog(@"Could not parse the Growl registration ticket from %@: %@", path, error);
         return nil;
     }
 
